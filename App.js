@@ -1,7 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { usePushNotifications } from './src/service/notificationservice';
+
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './src/Components/Home';
+import DriverAuth from './src/Components/driver/DriverAuth';
+import UserAuth from './src/Components/user/UserAuth';
+import UserPage from './src/Components/user/UserPage';
+import DriverPage from './src/Components/driver/DriverPage';
+
+
+
+const Stack = createStackNavigator();
+
 
 export default function App() {
   const {expoPushToken ,notification} = usePushNotifications([])
@@ -17,10 +31,15 @@ console.log(notification)
 
 
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="DriverAuth" component={DriverAuth} />
+        <Stack.Screen name="UserAuth" component={UserAuth} />
+        <Stack.Screen name="UserPage" component={UserPage} />
+        <Stack.Screen name="DriverPage" component={DriverPage} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

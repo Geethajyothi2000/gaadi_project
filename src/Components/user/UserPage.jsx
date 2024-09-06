@@ -62,7 +62,7 @@ function UserPage() {
       <MapView
         style={styles.map}
         region={mapRegion}
-        apiKey="AIzaSyCdDqedBbbwGb_nlCqWIoElNFQ49E8MHyY"
+        apiKey=""
       >
         {directions && <Marker coordinate={directions} />}
       </MapView>

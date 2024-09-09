@@ -21,7 +21,7 @@ function UserAuth() {
     const payload = isLogin
       ? { user_email: email, user_password: password }
       : { user_name: name, user_email: email, user_phone: phone, user_password: password };
-  
+
     axios
       .post(`http://192.168.1.71:3000${endpoint}`, payload)  // Ensure IP matches backend server
       .then((response) => {
@@ -34,46 +34,53 @@ function UserAuth() {
         Alert.alert('Error', 'Login/Signup failed');
       });
   };
-  
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{isLogin ? 'User Login' : 'User Signup'}</Text>
-      {!isLogin && (
+      <View style={styles.authBox}>
+        <Text style={styles.title}>{isLogin ? 'Welcome Back!' : 'Create Account'}</Text>
+        {!isLogin && (
+          <TextInput
+            style={styles.input}
+            placeholder="Full Name"
+            placeholderTextColor="#9A9A9A"
+            value={name}
+            onChangeText={setName}
+          />
+        )}
         <TextInput
           style={styles.input}
-          placeholder="Full Name"
-          value={name}
-          onChangeText={setName}
+          placeholder="Email Address"
+          placeholderTextColor="#9A9A9A"
+          value={email}
+          onChangeText={setEmail}
         />
-      )}
-      <TextInput
-        style={styles.input}
-        placeholder="Email Address"
-        value={email}
-        onChangeText={setEmail}
-      />
-      {!isLogin && (
+        {!isLogin && (
+          <TextInput
+            style={styles.input}
+            placeholder="Phone Number"
+            placeholderTextColor="#9A9A9A"
+            value={phone}
+            onChangeText={setPhone}
+          />
+        )}
         <TextInput
           style={styles.input}
-          placeholder="Phone Number"
-          value={phone}
-          onChangeText={setPhone}
+          placeholder="Password"
+          placeholderTextColor="#9A9A9A"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
         />
-      )}
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <Button title={isLogin ? 'Login' : 'Signup'} onPress={handleSubmit} />
-      <TouchableOpacity onPress={toggleAuthMode}>
-        <Text style={styles.toggleText}>
-          {isLogin ? "Don't have an account? Signup" : 'Already have an account? Login'}
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>{isLogin ? 'Login' : 'Signup'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={toggleAuthMode}>
+          <Text style={styles.toggleText}>
+            {isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Login'}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -81,25 +88,52 @@ function UserAuth() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#1E1E1E', // Dark background to match the look
     justifyContent: 'center',
+    paddingHorizontal: 30,
+  },
+  authBox: {
+    backgroundColor: '#2D2D2D', // Dark translucent background
+    borderRadius: 15,
     padding: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 10,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
+    color: '#fff',
     marginBottom: 20,
     textAlign: 'center',
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingLeft: 10,
+    height: 50,
+    backgroundColor: '#3C3C3C',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    color: '#fff',
+    marginBottom: 15,
+    fontSize: 16,
+  },
+  button: {
+    height: 50,
+    backgroundColor: '#007AFF',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   toggleText: {
-    color: 'blue',
+    color: '#007AFF',
     textAlign: 'center',
     marginTop: 10,
+    fontSize: 16,
   },
 });
 

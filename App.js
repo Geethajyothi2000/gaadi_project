@@ -11,6 +11,7 @@ import DriverAuth from './src/Components/driver/DriverAuth';
 import UserAuth from './src/Components/user/UserAuth';
 import UserPage from './src/Components/user/UserPage';
 import DriverPage from './src/Components/driver/DriverPage';
+import CarDetails from './src/Components/driver/CarDetails';
 
 
 
@@ -38,6 +39,7 @@ console.log(notification)
         <Stack.Screen name="UserAuth" component={UserAuth} />
         <Stack.Screen name="UserPage" component={UserPage} />
         <Stack.Screen name="DriverPage" component={DriverPage} />
+        <Stack.Screen name="CarDetails" component={CarDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
